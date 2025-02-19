@@ -3,18 +3,18 @@
 namespace App\Infrastructure\Controllers;
 
 use App\Http\Requests\RegisterRequest;
-use App\Services\ResgisterMensaje;
+use App\Services\RegisterMensaje;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Exception;
 
 class RegisterMensajeController extends Controller
 {
-    protected ResgisterMensaje $resgisterMensaje;
+    protected RegisterMensaje $registerMensaje;
 
-    public function __construct(ResgisterMensaje $resgisterMensaje)
+    public function __construct(RegisterMensaje $registerMensaje)
     {
-        $this->resgisterMensaje = $resgisterMensaje;
+        $this->registerMensaje = $registerMensaje;
     }
 
     public function __invoke(RegisterRequest $request): JsonResponse
@@ -23,7 +23,7 @@ class RegisterMensajeController extends Controller
         $msg   = $request->input('msg');
 
         try {
-            return $this->resgisterMensaje->execute($topic, $msg);
+            return $this->registerMensaje->execute($topic, $msg);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }

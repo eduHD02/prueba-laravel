@@ -11,9 +11,12 @@ class Mensaje extends Model
 
     protected $table = 'mensajes'; 
 
+    public $timestamps = false;
+
     protected $fillable = [
         'topic', 
-        'msg'
+        'msg',
+        'created_at'
     ];  
 }
 

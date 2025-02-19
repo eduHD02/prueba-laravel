@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('topic');
             $table->text('msg'); 
-            $table->timestamp('timestamp')->useCurrent();
+            $table->timestamp('created_at')->nullable();
         });
     }
 

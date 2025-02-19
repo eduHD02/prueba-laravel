@@ -15,12 +15,18 @@ class RegisterMensaje
     }
 
     public function execute(String $topic, String $msg): JsonResponse
-    {
-        echo"voy a insertar";
-        $ok = $this->dBClient->insertMsgToDB([$topic,$msg]);
-        if ($ok) {
+    {   
+        $mensajeData = [
+            'topic' => $topic,
+            'msg' => $msg,
+            'created_at' => now()
+        ];
+        try{
+            $ok = $this->dBClient->insertMsgToDB($mensajeData);
             return new JsonResponse(['message' => 'Usuario insertado correctamente'], 201);
+        }catch(\Exception $e){
+            return new JsonResponse(['message' => 'Error al insertar usuario'], 409);
         }
-        return new JsonResponse(['message' => 'Error al insertar usuario'], 409);
+        
     }
 }

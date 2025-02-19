@@ -15,7 +15,7 @@ class DBClient
         return Mensaje::all();
     }
     public function insertMsgToDB(array $mensajeData): void
-    {
+    {   
         Mensaje::create($mensajeData);
     }
 }
