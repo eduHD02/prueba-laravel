@@ -1,25 +1,37 @@
-<template>
+<template lang="">
   <div>
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <router-link to="/inicio">Inicio</router-link>
-          </li>
-          <li>
-            <router-link to="/nosotros">Nosotros</router-link>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <router-view></router-view>
-    </main>
+    <h1>Mensajes bbdd laravel</h1>
+    <ul>
+      <li v-for="(msgg, index) in mensajes" :key="index">{{ msgg }}</li>
+    </ul>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  data: () => ({}),
-};
+  data() {
+    return {
+      mensajes: []  
+    }
+  },
+  methods: {
+    async obtenerMensajes() {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/prueba/msg');
+        this.mensajes = response.data;  
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    }
+  },
+  mounted() {
+    this.obtenerMensajes();  
+  },
+}
 </script>
+
+<style lang="">
+  
+</style>
